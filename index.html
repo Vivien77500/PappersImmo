@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enregistrement de Prospect</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .relance {
+            display: none;
+        }
+    </style>
+    <script>
+        function toggleRelanceField() {
+            const select = document.getElementById("situation");
+            const relanceField = document.getElementById("relanceDate");
+
+            if (select.value === "A relancer") {
+                relanceField.style.display = "block";
+            } else {
+                relanceField.style.display = "none";
+            }
+        }
+    </script>
+</head>
+<body>
+
+    <h1>Enregistrer un nouveau prospect</h1>
+    
+    <form action="enregistrer_prospect.php" method="POST">
+        <label for="nom">Nom :</label>
+        <input type="text" id="nom" name="nom" placeholder="Entrez le nom du prospect" required>
+
+        <label for="email">Email :</label>
+        <input type="email" id="email" name="email" placeholder="Entrez l'email du prospect" required>
+
+        <label for="telephone">Téléphone :</label>
+        <input type="tel" id="telephone" name="telephone" placeholder="Entrez le téléphone du prospect" required>
+
+        <label for="adresse">Adresse postale :</label>
+        <input type="text" id="adresse" name="adresse" placeholder="Entrez l'adresse postale" required>
+
+        <label for="situation">Sélectionnez la situation :</label>
+        <select id="situation" name="situation" onchange="toggleRelanceField()" required>
+            <option value="vendeur">Vendeur</option>
+            <option value="locataire">Locataire</option>
+            <option value="non-vendeur">Non vendeur</option>
+            <option value="sous-mandat">Sous mandat de vente</option>
+            <option value="personne">Personne à l'adresse</option>
+            <option value="A relancer">A relancer</option>
+        </select>
+
+        <div id="relanceDate" class="relance">
+            <label for="date_relance">Date de relance :</label>
+            <input type="date" id="date_relance" name="date_relance">
+        </div>
+
+        <button type="submit">Enregistrer le prospect</button>
+    </form>
+
+</body>
+</html>
